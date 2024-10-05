@@ -113,11 +113,6 @@ function createQuantityButtons(button, cartItem) {
   button.appendChild(increaseButton);
 }
 
-
-
-
-
-
 function updateCart() {
     cartItemsList.innerHTML = '';
     var total = 0;
@@ -250,96 +245,62 @@ document.getElementById('confirm-order').addEventListener('click', function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function displayOrderSummary() {
     const orderItemsContainer = document.getElementById('order-items');
     orderItemsContainer.innerHTML = '';
 
     let totalOrderPrice = 0;
 
-    // عرض المنتجات المضافة إلى السلة في order summary
+   
     cart.forEach(item => {
         const listItem = document.createElement('li');
 
-        // إنشاء عنصر الصورة
+       
         const productImage = document.createElement('img');
         productImage.src = item.image;
         productImage.alt = item.name;
-        productImage.style.width = '50px';  // تعديل عرض الصورة حسب الحاجة
-        productImage.style.marginRight = '5px';  // إضافة مسافة بين الصورة والنص
+        productImage.style.width = '50px';  
+        productImage.style.marginRight = '5px'; 
         productImage.style.marginLeft = '5px';  
         productImage.style.marginTop = '5px'; 
 
-
-        // معلومات المنتج (بجانب الصورة)
         const productInfo = document.createElement('span');
         productInfo.textContent = `${item.name} - $${(item.price * item.quantity).toFixed(2)} `;
-        productInfo.style.color = 'black';  // جعل النص أسود
-        // إنشاء عنصر للكمية باللون البرتقالي
+        productInfo.style.color = 'black';  
+       
         const productQuantity = document.createElement('span');
         productQuantity.textContent = `x ${item.quantity}`;
-        productQuantity.style.color = 'orange';  // جعل الكمية باللون البرتقالي
+        productQuantity.style.color = 'orange';  
         productQuantity.style.margin = '9px';
 
-        // إضافة الصورة والمعلومات إلى العنصر
+     
         listItem.appendChild(productImage);
         listItem.appendChild(productInfo);
-        listItem.appendChild(productQuantity);  // إضافة الكمية بجانب المعلومات
+        listItem.appendChild(productQuantity);  
 
-        // إضافة العنصر إلى order summary
+       
         orderItemsContainer.appendChild(listItem);
 
-        // حساب إجمالي السعر
+       
         totalOrderPrice += item.price * item.quantity;
     });
 
-    // عرض إجمالي السعر في نهاية القائمة
+  
     const totalPriceElement = document.createElement('p');
     totalPriceElement.textContent = `Total: $${totalOrderPrice.toFixed(2)}`;
-    totalPriceElement.style.fontWeight = 'bold'; // لجعل النص عريضاً
-    totalPriceElement.style.color = 'black';  // جعل النص أسود
+    totalPriceElement.style.fontWeight = 'bold'; 
+    totalPriceElement.style.color = 'black'; 
     totalPriceElement.style.textAlign = 'center';
     totalPriceElement.style.fontSize = "20px";
 
     orderItemsContainer.appendChild(totalPriceElement);
 }
 
-// إضافة حدث عند تأكيد الطلب
+
 document.getElementById('confirm-order').addEventListener('click', function () {
     displayOrderSummary();
     document.querySelector('.order-summary').style.display = 'block';
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -351,7 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const quantityDisplay = control.querySelector('.quantity');
       let quantity = parseInt(quantityDisplay.textContent);
   
-      // Decrease quantity
       decreaseBtn.addEventListener('click', () => {
         if (quantity > 1) {
           quantity--;
@@ -359,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
   
-      // Increase quantity
+     
       increaseBtn.addEventListener('click', () => {
         quantity++;
         quantityDisplay.textContent = quantity;
