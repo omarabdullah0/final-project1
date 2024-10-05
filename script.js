@@ -59,9 +59,9 @@ function addToCart(event) {
 
 }
 
-// دالة لإنشاء أزرار `+` و `-` عند الضغط على "Add to Cart"
+
 function createQuantityButtons(button, cartItem) {
-  button.innerHTML = ''; // مسح محتوى زر "Add to Cart" لعرض أزرار الكمية
+  button.innerHTML = ''; 
 
   var decreaseButton = document.createElement('button');
   decreaseButton.textContent = '-';
@@ -107,7 +107,7 @@ function createQuantityButtons(button, cartItem) {
       button.querySelector('.quantity-display').textContent = cartItem.quantity;
   });
 
-  // إضافة الأزرار للزر الرئيسي
+ 
   button.appendChild(decreaseButton);
   button.appendChild(quantityDisplay);
   button.appendChild(increaseButton);
