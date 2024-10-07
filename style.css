@@ -2,6 +2,10 @@ body {
     background-color: #faebd778;
     font-family: specimen, sans-serif;
 }
+*{
+    font-family: specimen, sans-serif;
+
+}
 
 .contener {
     display: flex;
@@ -103,49 +107,14 @@ body {
     }
 
 }
-
-
-
-
-/* div .cake {
-    position: absolute;
-    top: 26px;
-    right: 68px;
-    background-color: white;
-    width: 367px;
-} */
-
-/* .cake {
-    background-color: white;
-    width: 90%; 
-    max-width: 367px; 
-    margin: 20px auto; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
-    padding: 20px; 
-    position: absolute;
-    top: 26px;
-    right: 68px;
-    background-color: white;
-    width: 367px;
-}
-
-@media (max-width: 768px) {
-    .cake {
-        margin: 10px; 
-        width: 95%; 
-    }
-} */
-
 .cake {
     background-color: white;
     width: 90%;
     max-width: 367px;
     margin: 20px auto;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     padding: 20px;
-    position: fixed;
+    position: absolute;
     top: 26px;
     right: 44px;
 }
@@ -161,32 +130,25 @@ body {
         margin-top: 20px;
     }
 }
-
-
-
-/*  */
-
 .cake img {
     width: 100%;
     max-width: 300px;
     margin: 5px;
 }
-
 @media (max-width: 768px) {
     .cake img {
         max-width: 200px;
         margin: 5px;
     }
 }
-
 .cake-top {
     position: relative;
-    bottom: 305px;
+    bottom: 235px;
     right: 0px;
     font-weight: bold;
     color: orangered;
-}
 
+}
 @media (max-width: 768px) {
     .cake-top {
         position: relative;
@@ -196,15 +158,13 @@ body {
         color: orangered;
     }
 }
-
 .cake-bottom {
     position: relative;
-    bottom: 55px;
+    bottom: 9px;
     right: 7px;
     font-weight: bold;
     color: #00000069;
 }
-
 @media (max-width: 768px) {
     .cake-bottom {
         position: relative;
@@ -218,7 +178,6 @@ body {
         z-index: -10;
     }
 }
-
 #confirm-order {
     margin-top: 10px;
     cursor: pointer;
@@ -229,27 +188,24 @@ body {
     border-radius: 30px;
     padding-bottom: 10px;
     border: none;
+    margin-left: 30px;
 }
-
 @media (max-width: 768px) {
     #confirm-order {
         width: 90%;
     }
 }
-
 .total-price1 {
     color: black;
     font-size: 20px;
     font-weight: bold;
     margin-top: 10px;
 }
-
 li {
     padding-bottom: 10px;
     font-weight: bold;
     list-style-type: none;
 }
-
 .list-order {
     width: 400px;
     background-color: white;
@@ -267,7 +223,6 @@ li {
     border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
-
 .list-order button {
     margin-top: 10px;
     cursor: pointer;
@@ -281,27 +236,17 @@ li {
     position: relative;
     top: 133px;
 }
-
 .list-order h2 {
     font-size: 30px;
 }
-
 .list-order p {
     color: #00000069;
 }
-
-
 .list-order img {
     position: relative;
     top: 13px;
     left: -155px;
 }
-
-
-
-
-/* ----------------------- */
-
 .order-summary {
     display: none;
     position: fixed;
@@ -317,8 +262,6 @@ li {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
 }
-
-
 @media (max-width: 768px) {
     .order-summary {
         display: none;
@@ -336,21 +279,17 @@ li {
         border-radius: 8px;
         width: 77%;
     }
-
 }
-
 .order-summary ul {
     list-style: none;
     padding: 0;
 }
-
 .order-summary img {
     width: 50px;
     height: 50px;
     margin-right: 10px;
     border-radius: 5px;
 }
-
 .order-summary button {
     margin-top: 20px;
     padding: 10px 20px;
@@ -364,7 +303,6 @@ li {
     border-radius: 26px;
     width: 80%;
 }
-
 .overlay {
     display: none;
     position: fixed;
@@ -375,14 +313,12 @@ li {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
-
 .order-summary ul {
     background-color: #ffe4c440;
     border-radius: 8px;
     padding-left: 8px;
     padding-top: 10px;
 }
-
 .red-border {
     border: 3px solid red;
 }
@@ -392,78 +328,50 @@ li {
     color: white;
 }
 
-
 #cart-items {
     list-style-type: none;
-    /* إزالة النقاط من القائمة */
     padding: 0;
-    /* إزالة الهوامش */
     margin: 0;
-    /* إزالة الهوامش */
 }
-
 #cart-items li {
     padding: 10px 0;
-    /* إضافة حواف عمودية */
     border-bottom: 1px solid #ccc;
-    /* إضافة خط تحت كل عنصر */
 }
-
 #cart-items li:last-child {
     border-bottom: none;
-    /* إزالة الخط من آخر عنصر */
 }
-
-
 .order-count {
     color: orange;
-    /* اللون البرتقالي */
     margin-top: 5px;
-    /* مسافة بين العدد وزر "Add to Cart" */
     font-size: 16px;
-    /* حجم الخط */
 }
-
-
-
 
 .button-add,
 .button-min {
     font-size: 24px;
-    /* حجم الخط */
     padding: 0 10px;
-    /* إضافة فراغ حول النص */
     cursor: pointer;
-    /* تغيير شكل المؤشر عند التمرير */
 }
-
 .order-summary ul {
     list-style-type: none;
     padding: 0;
 }
-
 .order-summary li {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
-
 .order-summary img {
     width: 50px;
     height: 50px;
     object-fit: cover;
     margin-right: 10px;
 }
-
-
-
-
 .quantity-control {
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  
   .quantity-control button {
     padding: 5px 10px;
     font-size: 16px;
@@ -473,7 +381,6 @@ li {
     font-size: 16px;
     font-weight: bold;
   }
-
 .card1 .add-to-cart{
     position: relative;
     top: -145px;
@@ -481,8 +388,6 @@ li {
     font-size: 16px;
     cursor: pointer;
 }
-
-
 @media (max-width: 768px) {
     .card1 .add-to-cart{
         position: relative;
@@ -491,22 +396,10 @@ li {
         font-size: 16px;
         cursor: pointer;
     }
-
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+span{
+width: 50%;
+}
+#confirm-order {
+    display: none;
+}
