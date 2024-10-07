@@ -2,6 +2,7 @@ var addToCartButtons = document.querySelectorAll('.add-to-cart');
 var cartItemsList = document.getElementById('cart-items');
 var totalPriceElement = document.getElementById('total-price');
 var cartHeader = document.querySelector('.cake-top');
+cartItemsList.style.marginTop = '35px';
 var cart = [];
 
 function addToCart(event) {
@@ -56,6 +57,22 @@ function addToCart(event) {
     createQuantityButtons(button, currentItem);
 
     updateCart();
+
+
+
+
+        var emptyCartMessage = document.getElementById('empty-cart-message');
+        if (emptyCartMessage) {
+            emptyCartMessage.style.display = 'none';
+        }
+
+
+
+
+
+        if (cart.length > 0) {
+            document.getElementById('confirm-order').style.display = 'block';
+        }
 }
 
 function createQuantityButtons(button, cartItem) {
@@ -112,36 +129,88 @@ function createQuantityButtons(button, cartItem) {
 }
 
 function updateCart() {
-    cartItemsList.innerHTML = '';
+    cartItemsList.innerHTML = ''; 
     var total = 0;
 
     cart.forEach((item, index) => {
         var listItem = document.createElement('li');
-        listItem.textContent = item.name + ' - $' + item.price + ' x ' + item.quantity;
+        listItem.style.display = 'flex';
+        listItem.style.justifyContent = 'space-between';
+        listItem.style.alignItems = 'center';
+
+
+        var itemName = document.createElement('span');
+        itemName.textContent = item.name + ' - $' + item.price;
+        itemName.style.fontWeight = '500';
+
+        var itemQuantity = document.createElement('span');
+        itemQuantity.textContent = ' ' + item.quantity + 'x';
+        itemQuantity.style.display = 'block';
+        itemQuantity.style.color = '#e14106'; 
+        itemQuantity.style.textAlign = 'right';
+        itemQuantity.style.marginLeft = '-74px';
+
+        var itemPrice = document.createElement('span');
+        itemPrice.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+        itemPrice.style.color = '';
+
+        var itemDetails = document.createElement('div');
+        itemDetails.appendChild(itemName);
+        itemDetails.appendChild(itemQuantity);
 
         var cancelButton = document.createElement('button');
         cancelButton.textContent = 'x';
         cancelButton.classList.add('cancel-button');
         cancelButton.style.backgroundColor = 'white';
-        cancelButton.style.border = '2px solid black';
-        cancelButton.style.borderRadius = '50px';
-        cancelButton.style.width = '30px';
+        cancelButton.style.border = '2px solid #8080809c';
+        cancelButton.style.borderRadius = '50%';
+        cancelButton.style.width = '19px';
+        cancelButton.style.height = '19px';
         cancelButton.style.cursor = 'pointer';
         cancelButton.style.marginLeft = '10px';
-        cancelButton.style.fontSize = "20px";
+        cancelButton.style.fontSize = "10px";
+        cancelButton.style.color = "#8080809c";
+        cancelButton.style.textAlign = "center";
 
-        cartItemsList.style.borderBottom = "1px solid #2b1d178a";
-
+    
         cancelButton.addEventListener('click', function () {
             removeItemFromCart(index);
         });
 
+        listItem.appendChild(itemDetails);
         listItem.appendChild(cancelButton);
         cartItemsList.appendChild(listItem);
         total += item.price * item.quantity;
     });
 
-    totalPriceElement.textContent = total.toFixed(2);
+    var existingTotal = document.querySelector('.total-item'); 
+    if (existingTotal) {
+        existingTotal.remove();
+    }
+
+
+    var totalItem = document.createElement('li');
+    totalItem.classList.add('total-item'); 
+    totalItem.style.display = 'flex';
+    totalItem.style.justifyContent = 'space-between';
+    totalItem.style.fontWeight = 'bold';
+
+    var totalLabel = document.createElement('span');
+    totalLabel.textContent = 'Order Total';
+    totalLabel.style.marginRight = '210px'; 
+    totalLabel.style.color = '#7a7878%'; 
+    totalLabel.style.width = '100%'; 
+    totalLabel.style.fontWeight = '500'; 
+
+
+    var totalValue = document.createElement('span');
+    totalValue.textContent = `$${total.toFixed(2)}`;
+    totalValue.style.marginLeft = 'auto'; 
+    totalValue.style.fontSize = '22px'; 
+
+    totalItem.appendChild(totalLabel);
+    totalItem.appendChild(totalValue);
+    cartItemsList.appendChild(totalItem); 
 
     var totalItems = 0;
     cart.forEach(item => {
@@ -171,8 +240,22 @@ function removeItemFromCart(index) {
 
     cart.splice(index, 1);
     updateCart();
-}
 
+
+    if (cart.length === 0) {
+        var emptyCartMessage = document.getElementById('empty-cart-message');
+        if (emptyCartMessage) {
+            emptyCartMessage.style.display = 'block'; 
+        }
+
+        document.getElementById('confirm-order').style.display = 'none';
+
+        cartHeader.textContent = 'Your Cart (0)';
+    }
+
+
+
+}
 for (var i = 0; i < addToCartButtons.length; i++) {
     addToCartButtons[i].addEventListener('click', addToCart);
 }
@@ -232,6 +315,8 @@ function displayOrderSummary() {
         productPrice.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
         productPrice.style.color = 'black';
         productPrice.style.fontSize = '14px';
+        productPrice.style.textAlign = 'right';
+        productPrice.style.padding = '5px';
 
         listItem.appendChild(productImage);
         listItem.appendChild(productInfo);
@@ -257,6 +342,8 @@ function displayOrderSummary() {
     totalPriceElement.style.color = 'black';
     totalPriceElement.style.fontWeight = 'bold';
     totalPriceElement.style.fontSize = '24px';
+    totalPriceElement.style.textAlign = 'right';
+    totalPriceElement.style.padding = '5px';
 
     totalPriceContainer.appendChild(totalLabelElement);
     totalPriceContainer.appendChild(totalPriceElement);
