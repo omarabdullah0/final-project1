@@ -158,12 +158,19 @@
     </div>
 
     <div class="cake">
-      <img src="assets/images/illustration-empty-cart.svg" alt="">
-
-      <h2 class="cake-top"> Your Cart (<!-- Quantity -->)</h2>
-      <p class="cake-bottom"> Your added items will appear here </p>
+      <img src="assets/images/illustration-empty-cart.svg" class="cake-photo" alt="" style="
+      width: 45%;
+      /* position: absolute; */
+      border-top: 50px solid transparent;
+  ">
+<h2 class="cake-top" style="position: absolute;top: 10px;left: 10px;display: block;margin: 0px;">Your Cart (0)</h2>
+      <p id="empty-cart-message">Your added items will appear here</p>
       <ul id="cart-items"></ul>
-      <p class="total-price1">Total: $<span id="total-price">0.00</span></p>
+      <!-- <p class="total-price1">Total: $<span id="total-price">0.00</span></p> -->
+       <p class="carbon"> This is <span style="font-weight: bold;">carbon-neutral</span> delivery</p>
+
+
+
       <button id="confirm-order">Confirm Order</button>
 
     </div>
@@ -187,8 +194,8 @@
 
   <div class="order-summary">
     <img src="assets/images/icon-order-confirmed.svg " alt="">
-    <h2>Order Confirmed</h2>
-    <p>We hope ypu enjoy your food ! </p>
+    <h2 style=" font-size: 28px; font-weight: 800;">Order Confirmed</h2>
+    <p style=" font-size: 11px; margin-left: 5px; color: gray;">We hope ypu enjoy your food ! </p>
     <ul id="order-items"></ul>
     <ul id="order-items"></ul>
     <button id="back-to-shop"> Start New Order </button>
