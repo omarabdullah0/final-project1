@@ -10,6 +10,7 @@ function addToCart(event) {
     var card = button.parentElement;
     var itemImageElement = card.querySelector('img');
 
+
     var cakeImageElement = document.querySelector('.cake img');
     if (cakeImageElement) {
         cakeImageElement.remove();
@@ -57,22 +58,14 @@ function addToCart(event) {
     createQuantityButtons(button, currentItem);
 
     updateCart();
+    var emptyCartMessage = document.getElementById('empty-cart-message');
+    if (emptyCartMessage) {
+        emptyCartMessage.style.display = 'none';
+    }
 
-
-
-
-        var emptyCartMessage = document.getElementById('empty-cart-message');
-        if (emptyCartMessage) {
-            emptyCartMessage.style.display = 'none';
-        }
-
-
-
-
-
-        if (cart.length > 0) {
-            document.getElementById('confirm-order').style.display = 'block';
-        }
+    if (cart.length > 0) {
+        document.getElementById('confirm-order').style.display = 'block';
+    }
 }
 
 function createQuantityButtons(button, cartItem) {
@@ -129,34 +122,43 @@ function createQuantityButtons(button, cartItem) {
 }
 
 function updateCart() {
-    cartItemsList.innerHTML = ''; 
+    cartItemsList.innerHTML = '';
     var total = 0;
 
     cart.forEach((item, index) => {
         var listItem = document.createElement('li');
         listItem.style.display = 'flex';
-        listItem.style.justifyContent = 'space-between';
-        listItem.style.alignItems = 'center';
-
+        listItem.style.flexDirection = 'column';
+        listItem.style.alignItems = 'flex-start';
 
         var itemName = document.createElement('span');
-        itemName.textContent = item.name + ' - $' + item.price;
-        itemName.style.fontWeight = '500';
+        itemName.textContent = item.name;
+        itemName.style.fontWeight = 'bold';
+        itemName.style.widows = '100%';
+        itemName.style.widows = '100%';
+
+        var itemDetails = document.createElement('div');
+        itemDetails.style.display = 'flex';
+        itemDetails.style.alignItems = 'center';
+        itemDetails.style.justifyContent = 'flex-start';
 
         var itemQuantity = document.createElement('span');
-        itemQuantity.textContent = ' ' + item.quantity + 'x';
-        itemQuantity.style.display = 'block';
-        itemQuantity.style.color = '#e14106'; 
-        itemQuantity.style.textAlign = 'right';
-        itemQuantity.style.marginLeft = '-74px';
+        itemQuantity.textContent = `${item.quantity}x`;
+        itemQuantity.style.color = '#e14106';
+        itemQuantity.style.marginRight = '5px';
+
+        var itemSinglePrice = document.createElement('span');
+        itemSinglePrice.textContent = `$${item.price.toFixed(2)}`; 
+        itemSinglePrice.style.color = 'rgb(0 0 0 / 37%)';
+        itemSinglePrice.style.marginRight = '10px'; 
 
         var itemPrice = document.createElement('span');
         itemPrice.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
-        itemPrice.style.color = '';
+        itemPrice.style.color = 'rgb(0 0 0 / 53%)';
 
-        var itemDetails = document.createElement('div');
-        itemDetails.appendChild(itemName);
         itemDetails.appendChild(itemQuantity);
+        itemDetails.appendChild(itemSinglePrice);
+        itemDetails.appendChild(itemPrice);
 
         var cancelButton = document.createElement('button');
         cancelButton.textContent = 'x';
@@ -171,46 +173,44 @@ function updateCart() {
         cancelButton.style.fontSize = "10px";
         cancelButton.style.color = "#8080809c";
         cancelButton.style.textAlign = "center";
+        cancelButton.style.marginLeft = 'auto';
+        cancelButton.style.padding = 'auto';
+        cancelButton.style.transform = 'translate(-1px, -41px)';
 
-    
+
         cancelButton.addEventListener('click', function () {
             removeItemFromCart(index);
         });
 
+        listItem.appendChild(itemName);
         listItem.appendChild(itemDetails);
         listItem.appendChild(cancelButton);
         cartItemsList.appendChild(listItem);
         total += item.price * item.quantity;
     });
 
-    var existingTotal = document.querySelector('.total-item'); 
+    var existingTotal = document.querySelector('.total-item');
     if (existingTotal) {
         existingTotal.remove();
     }
 
-
     var totalItem = document.createElement('li');
-    totalItem.classList.add('total-item'); 
+    totalItem.classList.add('total-item');
     totalItem.style.display = 'flex';
     totalItem.style.justifyContent = 'space-between';
     totalItem.style.fontWeight = 'bold';
 
     var totalLabel = document.createElement('span');
     totalLabel.textContent = 'Order Total';
-    totalLabel.style.marginRight = '210px'; 
-    totalLabel.style.color = '#7a7878%'; 
-    totalLabel.style.width = '100%'; 
-    totalLabel.style.fontWeight = '500'; 
-
+    totalLabel.style.fontWeight = '100';
 
     var totalValue = document.createElement('span');
     totalValue.textContent = `$${total.toFixed(2)}`;
-    totalValue.style.marginLeft = 'auto'; 
-    totalValue.style.fontSize = '22px'; 
+    totalValue.style.fontSize = '24px';
 
     totalItem.appendChild(totalLabel);
     totalItem.appendChild(totalValue);
-    cartItemsList.appendChild(totalItem); 
+    cartItemsList.appendChild(totalItem);
 
     var totalItems = 0;
     cart.forEach(item => {
@@ -218,6 +218,7 @@ function updateCart() {
     });
     cartHeader.textContent = 'Your Cart (' + totalItems + ')';
 }
+
 
 function removeItemFromCart(index) {
     var cartItem = cart[index];
@@ -245,7 +246,7 @@ function removeItemFromCart(index) {
     if (cart.length === 0) {
         var emptyCartMessage = document.getElementById('empty-cart-message');
         if (emptyCartMessage) {
-            emptyCartMessage.style.display = 'block'; 
+            emptyCartMessage.style.display = 'block';
         }
 
         document.getElementById('confirm-order').style.display = 'none';
@@ -259,12 +260,13 @@ function removeItemFromCart(index) {
 for (var i = 0; i < addToCartButtons.length; i++) {
     addToCartButtons[i].addEventListener('click', addToCart);
 }
-
 function displayOrderSummary() {
     const orderItemsContainer = document.getElementById('order-items');
     orderItemsContainer.innerHTML = '';
 
     let totalOrderPrice = 0;
+
+
 
     orderItemsContainer.style.backgroundColor = 'rgb(247 241 234 / 41%)';
     orderItemsContainer.style.padding = '5px';
@@ -357,7 +359,6 @@ document.getElementById('confirm-order').addEventListener('click', function () {
     document.querySelector('.overlay').style.display = 'block';
 });
 
-
 document.getElementById('back-to-shop').addEventListener('click', function () {
     cart = [];
 
@@ -401,5 +402,58 @@ document.getElementById('back-to-shop').addEventListener('click', function () {
         var originalSrc = img.getAttribute('data-original-src');
         img.src = originalSrc;
     });
+});
+
+document.getElementById('back-to-shop').onclick = function () {
+    window.location.reload();
+};
+
+document.getElementById('confirm-order').addEventListener('click', function () {
+    displayOrderSummary();
+    document.querySelector('.order-summary').style.display = 'block';
+    document.querySelector('.overlay').style.display = 'block';
+});
+
+document.getElementById('back-to-shop').addEventListener('click', function () {
+    cart = [];
+
+    const orderItemsContainer = document.getElementById('order-items');
+    orderItemsContainer.innerHTML = '';
+
+    totalPriceElement.textContent = '0.00';
+
+    cartHeader.textContent = 'Your Cart (0)';
+
+    document.querySelector('.order-summary').style.display = 'none';
+    document.querySelector('.overlay').style.display = 'none';
+
+    addToCartButtons.forEach(button => {
+        button.textContent = 'Add to Cart';
+        button.classList.remove('red-button', 'added-to-cart');
+    });
+
+    document.querySelectorAll('img').forEach(img => {
+        img.classList.remove('red-border');
+    });
+
+    const cakeListItems = document.querySelectorAll('.cake li');
+    cakeListItems.forEach(listItem => {
+        listItem.remove();
+    });
+
+    addToCartButtons.forEach(button => {
+        button.textContent = 'Add to Cart';
+        button.classList.remove('red-button', 'added-to-cart');
+    });
+
+    document.querySelectorAll('.cake img').forEach(img => {
+        img.classList.remove('red-border');
+        var originalSrc = img.getAttribute('data-original-src');
+        img.src = originalSrc;
+    });
+
+
+
+
 
 });
